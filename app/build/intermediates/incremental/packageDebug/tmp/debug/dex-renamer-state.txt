@@ -1,0 +1,4 @@
+#Sat Aug 22 18:28:53 SGT 2020
+base.0=C\:\\Users\\TOSHIBA\\Desktop\\Multidisciplinary_Design_Project_CZ3004-master\\Android\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
