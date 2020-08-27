@@ -1,4 +1,4 @@
-package com.example.mdp_android_grp15;
+package com.example.mdp_android_grp17;
 
 import org.junit.Test;
 

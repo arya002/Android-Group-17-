@@ -1,4 +1,4 @@
-package com.example.mdp_android_grp15.ui.main;
+package com.example.mdp_android_grp17.ui.main;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,8 +21,8 @@ import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
 
-import com.example.mdp_android_grp15.MainActivity;
-import com.example.mdp_android_grp15.R;
+import com.example.mdp_android_grp17.MainActivity;
+import com.example.mdp_android_grp17.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

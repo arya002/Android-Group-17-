@@ -1,4 +1,4 @@
-package com.example.mdp_android_grp15.ui.main;
+package com.example.mdp_android_grp17.ui.main;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -25,8 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.mdp_android_grp15.MainActivity;
-import com.example.mdp_android_grp15.R;
+import com.example.mdp_android_grp17.MainActivity;
+import com.example.mdp_android_grp17.R;
 
 import static android.content.Context.SENSOR_SERVICE;
 
