@@ -23,6 +23,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.mdp_android_grp15.ui.main.BluetoothConnectionService;
 import com.example.mdp_android_grp15.ui.main.BluetoothPopUp;
 import com.example.mdp_android_grp15.ui.main.CommsFragment;
+import com.example.mdp_android_grp15.ui.main.ControlFragment;
 import com.example.mdp_android_grp15.ui.main.GridMap;
 import com.example.mdp_android_grp15.ui.main.MapInformation;
 import com.example.mdp_android_grp15.ui.main.MapTabFragment;
@@ -58,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog myDialog;
 
     private static final String TAG = "Main Activity";
+    private int[] tabIcons = {
+            //TODO icon based on tab
+            android.R.drawable.ic_menu_call,
+            android.R.drawable.sym_contact_card,
+            R.drawable.ic_baseline_control_camera_24
+    };
+    private TabLayout tabs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +75,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
+        ((SectionsPagerAdapter) sectionsPagerAdapter).addFragment(new CommsFragment(), "Comms");
+        ((SectionsPagerAdapter) sectionsPagerAdapter).addFragment(new MapTabFragment(), "Map");
+        ((SectionsPagerAdapter) sectionsPagerAdapter).addFragment(new ControlFragment(), "Controller");
         viewPager.setAdapter(sectionsPagerAdapter);
         viewPager.setOffscreenPageLimit(9999);
-        TabLayout tabs = findViewById(R.id.tabs);
+        tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+        setupTabIcons();
         LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver, new IntentFilter("incomingMessage"));
 
         // Set up sharedPreferences
@@ -181,6 +193,12 @@ public class MainActivity extends AppCompatActivity {
                 showLog("Exiting reconfigureBtn");
             }
         });
+    }
+
+    private void setupTabIcons() {
+        tabs.getTabAt(0).setIcon(tabIcons[0]);
+        tabs.getTabAt(1).setIcon(tabIcons[1]);
+        tabs.getTabAt(2).setIcon(tabIcons[2]);
     }
 
     public static Button getF1() { return f1; }
