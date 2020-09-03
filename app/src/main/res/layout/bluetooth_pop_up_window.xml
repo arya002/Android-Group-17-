@@ -135,15 +135,12 @@
         android:id="@+id/connectBtn"
         android:layout_width="150dp"
         android:layout_height="48dp"
-        android:layout_marginStart="360dp"
-        android:layout_marginEnd="8dp"
         android:text="CONNECT"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/otherDevicesListView"
-        app:layout_constraintVertical_bias="0.494" />
+        app:layout_constraintVertical_bias="0.099" />
 
     <TextView
         android:id="@+id/pairedDevicesTitleTextView"

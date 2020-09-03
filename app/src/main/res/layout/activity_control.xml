@@ -7,15 +7,15 @@
 
     <Button
         android:id="@+id/calibrateButton"
-        android:layout_width="157dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_width="155dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
         android:clickable="true"
         android:text="CALIBRATE"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.801"
+        app:layout_constraintHorizontal_bias="0.784"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fastestToggleBtn" />
 
@@ -84,8 +84,8 @@
     <ImageButton
         android:id="@+id/exploreResetImageBtn"
         style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="45dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -97,8 +97,8 @@
 
     <ToggleButton
         android:id="@+id/exploreToggleBtn"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
+        android:layout_width="109dp"
+        android:layout_height="45dp"
         android:layout_marginStart="76dp"
         android:layout_marginLeft="76dp"
         android:layout_marginTop="8dp"
@@ -143,8 +143,8 @@
 
     <ToggleButton
         android:id="@+id/fastestToggleBtn"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
+        android:layout_width="109dp"
+        android:layout_height="45dp"
         android:layout_marginStart="76dp"
         android:layout_marginLeft="76dp"
         android:layout_marginTop="8dp"
@@ -186,8 +186,8 @@
     <ImageButton
         android:id="@+id/fastestResetImageBtn"
         style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="45dp"
-        android:layout_height="50dp"
+        android:layout_width="41dp"
+        android:layout_height="36dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.552"
