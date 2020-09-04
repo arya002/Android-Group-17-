@@ -87,32 +87,36 @@
 
     <Button
         android:id="@+id/saveBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginLeft="112dp"
+        android:layout_width="121dp"
+        android:layout_height="40dp"
+
+        android:layout_marginLeft="100dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/button_background"
         android:onClick="Save"
         android:text="SAVE"
+        android:textColor="#FFFFFF"
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/cancelReconfigureBtn"
         app:layout_constraintTop_toBottomOf="@+id/f2ValueEditText"
-        app:layout_constraintVertical_bias="0.044" />
+        app:layout_constraintVertical_bias="0.043" />
 
     <Button
         android:id="@+id/cancelReconfigureBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="121dp"
+        android:layout_height="40dp"
         android:layout_marginStart="148dp"
         android:layout_marginLeft="148dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/button_background"
         android:onClick="Cancel"
         android:text="CANCEL"
+        android:textColor="#FFFFFF"
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
