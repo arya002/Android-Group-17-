@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -33,278 +34,161 @@
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp" />
 
-            <Button
-                android:id="@+id/bluetoothButton"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="250dp"
-                android:background="@drawable/rounded_corner"
-                android:backgroundTint="@color/design_default_color_primary"
-                android:foreground="@android:drawable/stat_sys_data_bluetooth" />
-
-            <Button
-                android:id="@+id/mapInfoButton"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/rounded_corner"
-                android:backgroundTint="#000000"
-                android:foreground="@drawable/ic_map_info" />
 
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="507dp">
+            android:layout_height="550dp">
 
-            <View
-                android:id="@+id/view4"
-                android:layout_width="206dp"
-                android:layout_height="487dp"
-                android:layout_marginStart="392dp"
-                android:layout_marginLeft="400dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/shapes"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="94dp"
+                android:layout_width="wrap_content"
                 android:layout_height="34dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="108dp"
-                android:layout_marginRight="108dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:gravity="center"
                 android:text="Action :"
                 android:textColor="#000000"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/robotStatusTitleTextView" />
 
             <TextView
-                android:id="@+id/xLabelTextView"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="56dp"
-                android:gravity="center_horizontal"
-                android:text="X:"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/mapView"
-                app:layout_constraintTop_toBottomOf="@+id/directionLabelTextView"
-                app:tabMaxWidth="@android:dimen/thumbnail_width" />
-
-            <TextView
-                android:id="@+id/xAxisTextView"
-                android:layout_width="45dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="56dp"
-                android:text="0"
-                android:textAlignment="center"
-                android:textColor="@color/colorRed"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/xLabelTextView"
-                app:layout_constraintTop_toBottomOf="@+id/directionLabelTextView" />
-
-            <TextView
-                android:id="@+id/yLabelTextView"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="56dp"
-                android:gravity="center_horizontal"
-                android:text="Y:"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/xAxisTextView"
-                app:layout_constraintTop_toBottomOf="@+id/directionAxisTextView" />
-
-            <TextView
-                android:id="@+id/yAxisTextView"
-                android:layout_width="45dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="56dp"
-                android:text="0"
-                android:textAlignment="center"
-                android:textColor="@color/colorRed"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/yLabelTextView"
-                app:layout_constraintTop_toBottomOf="@+id/directionAxisTextView" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="205dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="396dp"
-                android:layout_marginLeft="396dp"
-                android:layout_marginTop="264dp"
-                android:background="@drawable/bottom_line"
-                android:gravity="center"
-                android:text="Settings"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/printMDFString"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:background="@drawable/button_background"
-                android:text="Print MDF String"
-                android:textColor="@color/colorWhite"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.538"
-                app:layout_constraintStart_toEndOf="@+id/mapView"
-                app:layout_constraintTop_toBottomOf="@+id/xAxisTextView" />
-
-            <Button
-                android:id="@+id/f1ActionButton"
-                android:layout_width="63dp"
-                android:layout_height="33dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:background="@drawable/button_background"
-                android:clickable="true"
-                android:contentDescription="F1"
-                android:focusable="true"
-                android:text="F1"
-                android:textColor="@color/colorWhite"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/mapView"
-                app:layout_constraintTop_toBottomOf="@+id/configureButton"
-                app:layout_constraintVertical_bias="0.351" />
-
-            <Button
-                android:id="@+id/f2ActionButton"
-                android:layout_width="63dp"
-                android:layout_height="33dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:background="@drawable/button_background"
-                android:clickable="true"
-                android:contentDescription="F2"
-                android:focusable="true"
-                android:text="F2"
-                android:textColor="@color/colorWhite"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.394"
-                app:layout_constraintStart_toEndOf="@+id/f1ActionButton"
-                app:layout_constraintTop_toBottomOf="@+id/configureButton"
-                app:layout_constraintVertical_bias="0.351" />
-
-            <Button
-                android:id="@+id/configureButton"
-                android:layout_width="180dp"
-                android:layout_height="45dp"
-                android:background="@drawable/button_background"
-                android:text="@string/configure"
-                android:textColor="@color/colorWhite"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.538"
-                app:layout_constraintStart_toEndOf="@+id/mapView"
-                app:layout_constraintTop_toBottomOf="@+id/printMDFString"
-                app:layout_constraintVertical_bias="0.08" />
-
-            <TextView
                 android:id="@+id/robotStatusTextView"
-                android:layout_width="94dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:gravity="center|left"
                 android:scrollbars="vertical"
                 android:text="Moving"
                 android:textAlignment="center"
                 android:textColor="#FF0404"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.927"
-                app:layout_constraintStart_toEndOf="@+id/mapView"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/robotStatusTitleTextView" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="205dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="396dp"
-                android:layout_marginLeft="396dp"
-                android:layout_marginTop="168dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/bottom_line"
                 android:gravity="center"
                 android:text="Robot Position"
                 android:textColor="#000000"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/directionLabelTextView"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/xAxisTextView"
+                android:layout_width="45dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/colorRed"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/xLabelTextView"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/yLabelTextView"
+                android:layout_width="30dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:gravity="center"
+                android:text="Y:"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/xAxisTextView"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/yAxisTextView"
+                android:layout_width="45dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="4dp"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/colorRed"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/yLabelTextView"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/xLabelTextView"
+                android:layout_width="30dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="X:"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/directionLabelTextView"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:tabMaxWidth="@android:dimen/thumbnail_width" />
 
             <TextView
                 android:id="@+id/robotStatusTitleTextView"
                 android:layout_width="205dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="392dp"
-                android:layout_marginLeft="392dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/bottom_line"
                 android:gravity="center"
                 android:text="Robot Status"
                 android:textColor="#000000"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/directionLabelTextView"
-                android:layout_width="111dp"
-                android:layout_height="39dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="138dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bottom_line"
                 android:gravity="center"
-                android:text="Direction :"
+                android:text="Direction"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/mapView"
-                app:layout_constraintTop_toBottomOf="@+id/robotStatusTextView" />
+                app:layout_constraintStart_toEndOf="@+id/robotStatusTitleTextView"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/directionAxisTextView"
                 android:layout_width="64dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="33dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginLeft="36dp"
                 android:gravity="center"
                 android:text="None"
                 android:textAlignment="center"
                 android:textColor="@color/colorRed"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/directionLabelTextView"
-                app:layout_constraintTop_toBottomOf="@+id/robotStatusTextView" />
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/robotStatusTitleTextView"
+                app:layout_constraintTop_toBottomOf="@+id/directionLabelTextView" />
 
             <view
                 android:id="@+id/mapView"
-                class="com.example.mdp_android_grp15.ui.main.GridMap"
+                class="com.example.mdp_android_grp17.ui.main.GridMap"
                 android:layout_width="382dp"
                 android:layout_height="493dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_marginStart="112dp"
+                android:layout_marginLeft="112dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.8" />
+                app:layout_constraintTop_toBottomOf="@+id/robotStatusTextView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -312,7 +196,7 @@
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"

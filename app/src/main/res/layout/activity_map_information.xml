@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mdp_android_grp15.ui.main.MapInformation">
+    tools:context="com.example.mdp_android_grp17.ui.main.MapInformation">
 
     <TextView
         android:id="@+id/mapTitleTextView"
@@ -23,7 +23,7 @@
 
     <view
         android:id="@+id/mapInformationView"
-        class="com.example.mdp_android_grp15.ui.main.GridView"
+        class="com.example.mdp_android_grp17.ui.main.GridView"
         android:layout_width="500dp"
         android:layout_height="650dp"
         android:layout_marginEnd="25dp"
@@ -36,17 +36,18 @@
 
     <ToggleButton
         android:id="@+id/obstacleBtn"
-        android:layout_width="136dp"
-        android:layout_height="45dp"
+        android:layout_width="183dp"
+        android:layout_height="44dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_background"
+        android:drawableLeft="@drawable/ic_baseline_map_24"
         android:textColor="#FFFFFF"
         android:textOff="Show Obstacle"
         android:textOn="Show Explored"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintHorizontal_bias="0.855"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapInformationView" />
 
