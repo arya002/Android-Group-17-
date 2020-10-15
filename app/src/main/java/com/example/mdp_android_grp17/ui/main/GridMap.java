@@ -32,6 +32,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.mdp_android_grp17.MainActivity.refreshMessageReceived;
+
 public class GridMap extends View {
 
     public GridMap(Context c) {
@@ -40,6 +42,7 @@ public class GridMap extends View {
     }
 
     SharedPreferences sharedPreferences;
+    private static SharedPreferences.Editor editor;
 
     private Paint blackPaint = new Paint();
     private Paint obstacleColor = new Paint();
@@ -313,7 +316,7 @@ public class GridMap extends View {
         cellSize = this.getCellSize();
 
         for (int x = 0; x <= COL; x++)
-            for (int y = 0; y <= ROW; y++)
+            for (int y = ROW; y >=0; y--)
                 cells[x][y] = new Cell(x * cellSize + (cellSize / 30), y * cellSize + (cellSize / 30), (x + 1) * cellSize, (y + 1) * cellSize, unexploredColor, "unexplored");
         showLog("Exiting createCell");
     }
@@ -434,7 +437,7 @@ public class GridMap extends View {
 
         row = this.convertRow(row);
         cells[col][row].setType("waypoint");
-
+        // waypoint comm
         MainActivity.printMessage("waypoint", waypointCoord[0]-1, waypointCoord[1]-1);
         showLog("Exiting setWaypointCoord");
     }
@@ -744,27 +747,65 @@ public class GridMap extends View {
                         else if ((String.valueOf(exploredString.charAt(j + 2))).equals("0") && !cells[x][y].type.equals("robot"))
                             cells[x][y].setType("unexplored");
                     }
+                    int length = 0;
+                    try{
+                        length = infoJsonObject.getInt("length");
+                    }catch (Exception e){
+                        if(length==0 ){
+                            infoJsonObject.put( "length","300");
+                            length = 300;
+                        }
+                    }
 
-                    int length = infoJsonObject.getInt("length");
 
                     hexStringObstacle = infoJsonObject.getString("obstacle");
                     showLog("updateMapInformation hexStringObstacle: " + hexStringObstacle);
                     hexBigIntegerObstacle = new BigInteger(hexStringObstacle, 16);
                     showLog("updateMapInformation hexBigIntegerObstacle: " + hexBigIntegerObstacle);
                     obstacleString = hexBigIntegerObstacle.toString(2);
+
+                    //{"map":[{"explored":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff","obstacle":"00000003b3"}]}
+                    //{"map":[{"explored":"ffffffffffffffffffffffffffffffff9fff3ffe7ffffffffffefffdffffff0fffffffffffff","obstacle":"010000000000800f10001040108011108f84002000000008002000800006000000000000"}]}
+                    //7e00040008001000200
+                    //007
+                    //0000 0000 0111
+
+                    int hexlength = hexStringObstacle.length();
+                    obstacleString = String.format("%"+4*hexlength+"s", obstacleString);
+
+                    obstacleString = obstacleString.replace(' ', '0');
+
+                    //for (int o = 0;o<toAdd ;o++){
+                        //obstacleString =  "0"+obstacleString  ;
+                        //obstacleString =  "0"+obstacleString  ;
+                        //obstacleString =  "0"+obstacleString  ;
+                        //obstacleString =  "0"+obstacleString  ;
+                    //}
+
                     while (obstacleString.length() < length) {
-                        obstacleString = "0" + obstacleString;
+                        obstacleString = obstacleString +  "0" ;
                     }
                     showLog("updateMapInformation obstacleString: " + obstacleString);
                     setPublicMDFExploration(hexStringExplored);
                     setPublicMDFObstacle(hexStringObstacle);
+                    String messageMDF = "Explored : " + GridMap.getPublicMDFExploration();
+                    editor = sharedPreferences.edit();
+                    editor.putString("message", CommsFragment.getMessageReceivedTextView().getText() + "\n" + messageMDF);
+                    editor.commit();
+                    refreshMessageReceived();
+                    messageMDF = "Obstacle : " + GridMap.getPublicMDFObstacle() ;
+                    editor.putString("message", CommsFragment.getMessageReceivedTextView().getText() + "\n" + messageMDF);
+                    editor.commit();
+                    refreshMessageReceived();
 
                     int k = 0;
                     for (int row = ROW - 1; row >= 0; row--)
                         for (int col = 1; col <= COL; col++)
                             if ((cells[col][row].type.equals("explored") || (cells[col][row].type.equals("robot"))) && k < obstacleString.length()) {
-                                if ((String.valueOf(obstacleString.charAt(k))).equals("1"))
-                                    this.setObstacleCoord(col, 20 - row);
+                                if ((String.valueOf(obstacleString.charAt(k))).equals("1")) {
+                                    //if(!cells[col][row].type.equals("image"))
+                                        this.setObstacleCoord(col, 20 - row);
+                                }
                                 k++;
                             }
 
@@ -778,22 +819,23 @@ public class GridMap extends View {
                     infoJsonArray = mapInformation.getJSONArray("robotPosition");
 //                    infoJsonObject = infoJsonArray.getJSONObject(0);
 
-                    for (int row = ROW - 1; row >= 0; row--)
-                        for (int col = 1; col <= COL; col++)
-                            cells[col][row].setType("unexplored");
+
 
                     String direction;
-                    if (infoJsonArray.getInt(2) == 90) {
+                    if (infoJsonArray.getString(2).equals("E")) {
                         direction = "right";
-                    } else if (infoJsonArray.getInt(2) == 180) {
+                    } else if (infoJsonArray.getString(2).equals("S")) {
                         direction = "down";
-                    } else if (infoJsonArray.getInt(2) == 270) {
+                    } else if (infoJsonArray.getString(2).equals("W")) {
                         direction = "left";
                     } else {
                         direction = "up";
                     }
-                    this.setStartCoord(infoJsonArray.getInt(0), infoJsonArray.getInt(1));
-                    this.setCurCoord(infoJsonArray.getInt(0)+2, convertRow(infoJsonArray.getInt(1))-1, direction);
+                    if(infoJsonArray.getInt(0)>13 || infoJsonArray.getInt(0) <1) return;
+                    if(infoJsonArray.getInt(1)>18 || infoJsonArray.getInt(1) <1) return;
+
+                    this.setStartCoord(infoJsonArray.getInt(0),20-infoJsonArray.getInt(1));
+                    this.setCurCoord(infoJsonArray.getInt(0)+1, 20-convertRow(infoJsonArray.getInt(1))+1, direction);
                     canDrawRobot = true;
                     break;
                 case "waypoint":
@@ -827,12 +869,12 @@ public class GridMap extends View {
                         moveRobot(infoJsonObject.getString("direction"));
                     message = "moveDirection: " + infoJsonObject.getString("direction");
                     break;
-                case "status":
+                case "Status":
 //                    infoJsonArray = mapInformation.getJSONArray("status");
 //                    infoJsonObject = infoJsonArray.getJSONObject(0);
 //                    printRobotStatus(infoJsonObject.getString("status"));
 //                    message = "status: " + infoJsonObject.getString("status");
-                    String msg = mapInformation.getString("status");
+                    String msg = mapInformation.getString("Status");
                     printRobotStatus(msg);
                     message = "status: " + msg;
                     break;

@@ -39,9 +39,10 @@ import org.json.JSONObject;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
-
     // Declaration Variables
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private static GridMap gridMap;
     static TextView xAxisTextView, yAxisTextView, directionAxisTextView;
     static TextView robotStatusTextView;
-    static Button f1, f2;
+
     Button reconfigure;
     ReconfigureFragment reconfigureFragment = new ReconfigureFragment();
 
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
     BluetoothDevice mBTDevice;
     private static UUID myUUID;
     ProgressDialog myDialog;
-
     private static final String TAG = "Main Activity";
     private int[] tabIcons = {
             android.R.drawable.ic_menu_call,
@@ -130,9 +130,7 @@ public class MainActivity extends AppCompatActivity {
         tabs.getTabAt(3).setIcon(tabIcons[3]);
     }
 
-    public static Button getF1() { return f1; }
 
-    public static Button getF2() { return f2; }
 
     public static GridMap getGridMap() {
         return gridMap;
@@ -174,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 jsonObject.put(name, name);
                 jsonObject.put("x", x);
                 jsonObject.put("y", y);
-                message = name + " (" + x + "," + y + ")";
+                message = "ALG|"+name + " (" + x + "," + y + ")#";
                 break;
             default:
                 message = "Unexpected default for printMessage: " + name;
@@ -191,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static void refreshMessageReceived() {
         CommsFragment.getMessageReceivedTextView().setText(sharedPreferences.getString("message", ""));
+        CommsFragment.getMessageReceivedTextView().append(" ");
     }
 
 
@@ -263,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             String message = intent.getStringExtra("receivedMessage");
             showLog("receivedMessage: message --- " + message);
+            // From AMDTOOL
             try {
                 if (message.length() > 7 && message.substring(2,6).equals("grid")) {
                     String resultString = "";
@@ -300,15 +300,54 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
+            // IMAGE FOUND
             try {
-                if (message.length() > 8 && message.substring(2,7).equals("image")) {
-                    JSONObject jsonObject = new JSONObject(message);
-                    JSONArray jsonArray = jsonObject.getJSONArray("image");
-                    gridMap.drawImageNumberCell(jsonArray.getInt(0),jsonArray.getInt(1),jsonArray.getInt(2));
-                    showLog("Image Added for index: " + jsonArray.getInt(0) + "," +jsonArray.getInt(1));
+
+                String regexpStr = "\\[(.*?)\\]";
+                Pattern pattern = Pattern.compile(regexpStr);
+                Matcher m = pattern.matcher(message);
+                String imageString ="{imageID,x,y} = ";
+                boolean hasImage = false;
+                while(m.find()) {
+                    String found = m.group();
+                    found = found.replaceAll("[^\\d]", " ");
+                    found = found.trim();
+                    found = found.replaceAll("\\s+", " ");
+                    String[] arrOfDigits = found.split(" ");
+                    int x = 1, y = 1, id = 1;
+                    if(arrOfDigits.length==3){
+                        x = Integer.parseInt(arrOfDigits[0]);
+                        y = Integer.parseInt(arrOfDigits[1]);
+                        id = Integer.parseInt(arrOfDigits[2]);
+                        gridMap.drawImageNumberCell(x,y,id);
+                        showLog("Image Added for index: " + x + "," +y);
+                        imageString = imageString + "("+id+","+x+","+y+")," ;
+                        hasImage=true;
+                    }
                 }
-            } catch (JSONException e) {
+                if(hasImage){
+                    editor = sharedPreferences.edit();
+                    editor.putString("message", CommsFragment.getMessageReceivedTextView().getText() + "\n" + imageString);
+                    editor.commit();
+                    refreshMessageReceived();
+                }
+
+
+                //if (message.length() > 8 && message.substring(2,7).equals("image")) {
+                    //JSONObject jsonObject = new JSONObject(message);
+                    //JSONArray jsonArray = jsonObject.getJSONArray("image");
+                    //int x = jsonArray.getInt(0);
+                    //int y = jsonArray.getInt(1);
+                    //int id = jsonArray.getInt(2);
+                    //gridMap.drawImageNumberCell(x,y,id);
+                    //showLog("Image Added for index: " + jsonArray.getInt(0) + "," +jsonArray.getInt(1));
+                    //editor = sharedPreferences.edit();
+                    //String imagestringToAdd = "("+ x +","+y+","+id+"),";
+                    //editor.putString("message", CommsFragment.getMessageReceivedTextView().getText() + "\n" + imageString+imagestringToAdd);
+                    //editor.commit();
+                    //refreshMessageReceived();
+                //}
+            } catch (Exception e) {
                 showLog("Adding Image Failed");
             }
 

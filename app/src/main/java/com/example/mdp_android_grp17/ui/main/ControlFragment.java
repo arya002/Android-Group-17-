@@ -153,7 +153,7 @@ public class ControlFragment extends Fragment implements SensorEventListener {
                         updateStatus("moving forward");
                     else
                         updateStatus("Unable to move forward");
-                    MainActivity.printMessage("ALGO:FWD");
+                    MainActivity.printMessage("ARD|f#");
                 }
                 else
                     updateStatus("Please press 'STARTING POINT'");
@@ -170,7 +170,7 @@ public class ControlFragment extends Fragment implements SensorEventListener {
                 else if (gridMap.getCanDrawRobot() && !gridMap.getAutoUpdate()) {
                     gridMap.moveRobot("right");
                     MainActivity.refreshLabel();
-                    MainActivity.printMessage("ALGO:RGT");
+                    MainActivity.printMessage("ARD|r#");
                 }
                 else
                     updateStatus("Please press 'STARTING POINT'");
@@ -191,7 +191,7 @@ public class ControlFragment extends Fragment implements SensorEventListener {
                         updateStatus("moving backward");
                     else
                         updateStatus("Unable to move backward");
-                    MainActivity.printMessage("ALGO:BCK");
+                    MainActivity.printMessage("ARD|v#");
                 }
                 else
                     updateStatus("Please press 'STARTING POINT'");
@@ -209,7 +209,7 @@ public class ControlFragment extends Fragment implements SensorEventListener {
                     gridMap.moveRobot("left");
                     MainActivity.refreshLabel();
                     updateStatus("turning left");
-                    MainActivity.printMessage("ALGO:LFT");
+                    MainActivity.printMessage("ARD|l#");
                 }
                 else
                     updateStatus("Please press 'STARTING POINT'");
@@ -229,7 +229,7 @@ public class ControlFragment extends Fragment implements SensorEventListener {
                 }
                 else if (exploreToggleBtn.getText().equals("STOP")) {
                     showToast("Exploration timer start!");
-                    MainActivity.printMessage("ES|");
+                    MainActivity.printMessage("ALG|BE#");
                     robotStatusTextView.setText("Exploration Started");
                     exploreTimer = System.currentTimeMillis();
                     timerHandler.postDelayed(timerRunnableExplore, 0);
@@ -253,7 +253,7 @@ public class ControlFragment extends Fragment implements SensorEventListener {
                 }
                 else if (fastestToggleBtn.getText().equals("STOP")) {
                     showToast("Fastest timer start!");
-                    MainActivity.printMessage("FS|");
+                    MainActivity.printMessage("ALG|BF#");
                     robotStatusTextView.setText("Fastest Path Started");
                     fastestTimer = System.currentTimeMillis();
                     timerHandler.postDelayed(timerRunnableFastest, 0);
@@ -330,7 +330,7 @@ public class ControlFragment extends Fragment implements SensorEventListener {
             @Override
             public void onClick(View v) {
                 showLog("Clicked Calibrate Button");
-                MainActivity.printMessage("SS|");
+                MainActivity.printMessage("ARD|A#");
                 MapTabFragment.manualUpdateRequest = true;
                 showLog("Exiting Calibrate Button");
             }
@@ -372,22 +372,22 @@ public class ControlFragment extends Fragment implements SensorEventListener {
                 showLog("Sensor Move Forward Detected");
                 gridMap.moveRobot("forward");
                 MainActivity.refreshLabel();
-                MainActivity.printMessage("ALGO:FWD");
+                MainActivity.printMessage("ARD|f#");
             } else if (y > 2) {
                 showLog("Sensor Move Backward Detected");
                 gridMap.moveRobot("back");
                 MainActivity.refreshLabel();
-                MainActivity.printMessage("ALGO:BCK");
+                MainActivity.printMessage("ARD|v#");
             } else if (x > 2) {
                 showLog("Sensor Move Left Detected");
                 gridMap.moveRobot("left");
                 MainActivity.refreshLabel();
-                MainActivity.printMessage("ALGO:LFT");
+                MainActivity.printMessage("ARD|l#");
             } else if (x < -2) {
                 showLog("Sensor Move Right Detected");
                 gridMap.moveRobot("right");
                 MainActivity.refreshLabel();
-                MainActivity.printMessage("ALGO:RGT");
+                MainActivity.printMessage("ARD|r#");
             }
         }
         sensorFlag = false;

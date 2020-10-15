@@ -22,6 +22,9 @@ import com.example.mdp_android_grp17.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MapTabFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -36,7 +39,6 @@ public class MapTabFragment extends Fragment {
     GridMap gridMap;
     private static boolean autoUpdate = false;
     public static boolean manualUpdateRequest = false;
-
     public static MapTabFragment newInstance(int index) {
         MapTabFragment fragment = new MapTabFragment();
         Bundle bundle = new Bundle();
@@ -214,7 +216,7 @@ public class MapTabFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showLog("Clicked updateButton");
-                MainActivity.printMessage("sendArena");
+                MainActivity.printMessage("ALG|SAI#");
                 manualUpdateRequest = true;
                 showLog("Exiting updateButton");
                 try {

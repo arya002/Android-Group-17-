@@ -1,5 +1,7 @@
 package com.example.mdp_android_grp17.ui.main;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -61,6 +63,9 @@ public class SettingFragment extends Fragment {
 
     }
 
+    public static Button getF1() { return f1; }
+
+    public static Button getF2() { return f2; }
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
@@ -119,15 +124,21 @@ public class SettingFragment extends Fragment {
         printMDFStringButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String cm = "";
                 String message = "Explored : " + GridMap.getPublicMDFExploration();
                 editor = sharedPreferences.edit();
                 editor.putString("message", CommsFragment.getMessageReceivedTextView().getText() + "\n" + message);
                 editor.commit();
+                cm = message;
                 refreshMessageReceived();
                 message = "Obstacle : " + GridMap.getPublicMDFObstacle() + "0";
                 editor.putString("message", CommsFragment.getMessageReceivedTextView().getText() + "\n" + message);
                 editor.commit();
                 refreshMessageReceived();
+                cm = cm +"\n" +message;
+                ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("mdf",cm);
+                clipboard.setPrimaryClip(clip);
             }
         });
 
